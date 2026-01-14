@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+
+  activemq:
+    image: rmohr/activemq
+    container_name: activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8161" ]
+      interval: 10s
+      timeout: 5s
+      retries: 1
+
+
+  publish-service:
+    image: publish-service:latest
+    container_name: publish-service
+    ports:
+      - "2000:2000"
+    depends_on:
+      activemq:
+        condition: service_healthy
