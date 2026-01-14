@@ -21,6 +21,7 @@ public class ActiveMQPublisher implements MessagePublisher {
 
     @Override
     public void publish(String message) {
+        System.out.println("<<< queue name >>>> = " + destQueueName + "         Message:: " + message);
         jmsTemplate.convertAndSend(destQueueName, message);
     }
 }
