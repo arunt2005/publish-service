@@ -29,6 +29,6 @@ public class ActiveMQPublisher implements MessagePublisher {
     public void publish(OrderMessage order) {
         // No need to manually convert to String!
         jmsTemplate.convertAndSend("order-queue", order);
-        System.out.println("Sent JSON message for order: " + order.getOrderId());
+        System.out.println("<<<<< PUBLISHED ORDER: " + order);
     }
 }
