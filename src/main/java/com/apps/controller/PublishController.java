@@ -1,6 +1,7 @@
 package com.apps.controller;
 
 import com.apps.dto.ApiResponse;
+import com.apps.dto.OrderMessage;
 import com.apps.dto.PublishMessageRequest;
 import com.apps.messaging.MessagePublisher;
 import jakarta.validation.Valid;
@@ -22,10 +23,11 @@ public class PublishController {
 
     @PostMapping("/publish")
     public ResponseEntity<ApiResponse> publish(
-            @Valid @RequestBody PublishMessageRequest request) {
-        publisher.publish(request.getMessage());
+            @Valid @RequestBody OrderMessage request) {
+        // publisher.publish(request.getMessage());
+        publisher.publish(request);
         return ResponseEntity.ok(
-                new ApiResponse("SUCCESS", "Message published successfully")
+                new ApiResponse("SUCCESS", "Order sent to queue")
         );
     }
 }

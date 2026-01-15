@@ -15,5 +15,4 @@ public class OrderMessage {
     private String product;
     private int quantity;
 
-    // getters & setters
 }

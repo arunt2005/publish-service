@@ -1,5 +1,6 @@
 package com.apps.messaging.activemq;
 
+import com.apps.dto.OrderMessage;
 import com.apps.messaging.MessagePublisher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -21,7 +22,13 @@ public class ActiveMQPublisher implements MessagePublisher {
 
     @Override
     public void publish(String message) {
-        System.out.println("<< working 2 >>");
         jmsTemplate.convertAndSend(destQueueName, message);
+    }
+
+    @Override
+    public void publish(OrderMessage order) {
+        // No need to manually convert to String!
+        jmsTemplate.convertAndSend("order-queue", order);
+        System.out.println("Sent JSON message for order: " + order.getOrderId());
     }
 }
