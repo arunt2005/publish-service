@@ -2,7 +2,6 @@ package com.apps.controller;
 
 import com.apps.dto.ApiResponse;
 import com.apps.dto.OrderMessage;
-import com.apps.dto.PublishMessageRequest;
 import com.apps.messaging.MessagePublisher;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +27,15 @@ public class PublishController {
         publisher.publish(request);
         return ResponseEntity.ok(
                 new ApiResponse("SUCCESS", "Order sent to queue")
+        );
+    }
+
+    @PostMapping("/test/publish")
+    public ResponseEntity<ApiResponse> publish(@RequestBody String message) {
+        System.out.println("<<< calling..... incoming message :: " + message);
+        publisher.publish(message);
+        return ResponseEntity.ok(
+                new ApiResponse("SUCCESS", "For testing purpose.")
         );
     }
 }

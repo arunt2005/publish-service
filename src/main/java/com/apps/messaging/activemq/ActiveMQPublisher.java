@@ -22,13 +22,15 @@ public class ActiveMQPublisher implements MessagePublisher {
 
     @Override
     public void publish(String message) {
+        System.out.println("<<<<< Before putting into queue :: " + message + "    >>>>>");
         jmsTemplate.convertAndSend(destQueueName, message);
+        System.out.println("<<<<< PUBLISHED DONE.  >>>>");
     }
 
     @Override
     public void publish(OrderMessage order) {
         // No need to manually convert to String!
         jmsTemplate.convertAndSend("order-queue", order);
-        System.out.println("<<<<< PUBLISHED ORDER:  " + order  +"    >>>>>>");
+        System.out.println("<<<<< PUBLISHED ORDER:  " + order + "    >>>>>>");
     }
 }
